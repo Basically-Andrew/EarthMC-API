@@ -3,8 +3,7 @@ const scout = require("@scout_apm/scout-apm"),
       express = require("express"),
       app = express(),
       rateLimit = require('express-rate-limit'),
-      mainRoute = require("./routes/webpage/main"),
-      inviteRoute = require("./routes/webpage/invite"),
+      webRoute = require("./routes/webpage/web"),
       serverInfoRoute = require("./routes/api/v1/serverInfo")
 
 const auroraTownsRoute = require("./routes/api/v1/aurora/towns"),
@@ -76,8 +75,7 @@ async function setupRoutes() {
       app.use(bodyParser.urlencoded({ limit: "20mb", extended: true, parameterLimit: 20000 }))
 
       // Serve webpage routes.
-      app.use("/", mainRoute)
-      app.use("/invite", inviteRoute)
+      app.use("/", webRoute)
       app.use("/api/v1/serverinfo", serverInfoRoute)
 
       //#region Serve Nova routes.
